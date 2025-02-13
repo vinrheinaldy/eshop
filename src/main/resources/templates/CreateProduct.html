@@ -11,15 +11,21 @@
     <h3>Create New Product</h3>
 
     <form th:action="@{/product/create}" th:object="${product}" method="post">
+        <!-- Tambahkan input hidden untuk productId -->
+        <input type="hidden" th:field="*{productId}">
+
         <div class="form-group">
             <label for="nameInput">Name</label>
-            <input th:field="*{productName}" type="text" class="form-control mb-4 col-4" id="nameInput" placeholder="Enter product' name">
+            <input th:field="*{productName}" type="text" class="form-control mb-4 col-4" id="nameInput" placeholder="Enter product name" required>
         </div>
+
         <div class="form-group">
             <label for="quantityInput">Quantity</label>
-            <input th:field="*{productQuantity}" type="text" class="form-control mb-4 col-4" id="quantityInput" placeholder="Enter product' name">
+            <input th:field="*{productQuantity}" type="number" class="form-control mb-4 col-4" id="quantityInput" placeholder="Enter product quantity" required>
         </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a th:href="@{/product/list}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 
