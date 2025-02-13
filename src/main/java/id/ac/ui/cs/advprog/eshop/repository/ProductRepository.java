@@ -19,4 +19,11 @@ public class ProductRepository {
     public Iterator<Product> findAll() {
         return productData.iterator();
     }
+
+    public void deleteProduct(String productId) {
+        if (productId == null || productId.isEmpty()) {
+            throw new IllegalArgumentException("Product ID cannot be null or empty");
+        }
+        productData.removeIf(product -> product.getProductId() != null && product.getProductId().equals(productId));
+    }
 }
