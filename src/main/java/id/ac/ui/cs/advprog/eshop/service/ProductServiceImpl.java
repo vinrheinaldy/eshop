@@ -41,4 +41,13 @@ public class ProductServiceImpl implements ProductService{
 
         productRepository.deleteProduct(productId);
     }
+
+    @Override
+    public Product editProduct(Product product) {
+        if (product.getProductId() == null || product.getProductId().isEmpty()) {
+            throw new IllegalArgumentException("Product ID cannot be null or empty");
+        }
+
+        return productRepository.editProduct(product);
+    }
 }
