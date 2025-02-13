@@ -26,4 +26,17 @@ public class ProductRepository {
         }
         productData.removeIf(product -> product.getProductId() != null && product.getProductId().equals(productId));
     }
+
+    public Product editProduct(Product product) {
+        if (product.getProductId() == null || product.getProductId().isEmpty()) {
+            throw new IllegalArgumentException("Product ID cannot be null or empty");
+        }
+        for (int i = 0; i < productData.size(); i++) {
+            if (productData.get(i).getProductId().equals(product.getProductId())) {
+                productData.set(i, product);
+                break;
+            }
+        }
+        return product;
+    }
 }
