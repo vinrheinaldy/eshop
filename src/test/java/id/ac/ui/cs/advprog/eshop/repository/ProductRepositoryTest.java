@@ -156,4 +156,106 @@ class ProductRepositoryTest {
             }
         });
     }
+    @Test
+    void testDeleteProductThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            productRepository.deleteProduct(null);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            productRepository.deleteProduct("");
+        });
+    }
+    @Test
+    void testEditProductThrowsIllegalArgumentException() {
+        Product productWithNullId = new Product();
+        productWithNullId.setProductId(null);
+        productWithNullId.setProductName("Product with null ID");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            productRepository.editProduct(productWithNullId);
+        });
+
+        Product productWithEmptyId = new Product();
+        productWithEmptyId.setProductId("");
+        productWithEmptyId.setProductName("Product with empty ID");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            productRepository.editProduct(productWithEmptyId);
+        });
+    }
+
+    @Test
+    void testRemoveIfProductIdDoesNotMatch() {
+        Product product1 = new Product();
+        product1.setProductId("123");
+        product1.setProductName("Product 1");
+        product1.setProductQuantity(10);
+        productRepository.create(product1);
+
+        Product product2 = new Product();
+        product2.setProductId("456");
+        product2.setProductName("Product 2");
+        product2.setProductQuantity(20);
+        productRepository.create(product2);
+
+        productRepository.deleteProduct("789");
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        assertEquals(product1, productIterator.next());
+        assertTrue(productIterator.hasNext());
+        assertEquals(product2, productIterator.next());
+        assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testEditProductIdDoesNotMatch() {
+        Product product1 = new Product();
+        product1.setProductId("123");
+        product1.setProductName("Product 1");
+        product1.setProductQuantity(10);
+        productRepository.create(product1);
+
+        Product updatedProduct = new Product();
+        updatedProduct.setProductId("456");
+        updatedProduct.setProductName("Updated Product");
+        updatedProduct.setProductQuantity(20);
+
+        productRepository.editProduct(updatedProduct);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct = productIterator.next();
+        assertEquals("Product 1", savedProduct.getProductName());
+        assertEquals(10, savedProduct.getProductQuantity());
+    }
+    @Test
+    void testRemoveIfProductIdIsNull() {
+        Product product1 = new Product();
+        product1.setProductId(null);
+        product1.setProductName("Product 1");
+        product1.setProductQuantity(10);
+        productRepository.create(product1);
+
+        productRepository.deleteProduct("123");
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        assertEquals(product1, productIterator.next());
+        assertFalse(productIterator.hasNext());
+    }
+    @Test
+    void testRemoveIfProductIdMatches() {
+        Product product1 = new Product();
+        product1.setProductId("123");
+        product1.setProductName("Product 1");
+        product1.setProductQuantity(10);
+        productRepository.create(product1);
+
+        productRepository.deleteProduct("123");
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertFalse(productIterator.hasNext());
+    }
 }
