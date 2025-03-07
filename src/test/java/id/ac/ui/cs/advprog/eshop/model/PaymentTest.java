@@ -29,7 +29,7 @@ public class PaymentTest {
 
         order.setStatus(OrderStatus.SUCCESS.getValue());
         paymentData = new HashMap<>();
-        paymentData.put("voucherCode", "1234ESHOPABC5678");
+        paymentData.put("voucherCode", "ESHOP1234ABC5678");
     }
 
     @Test
@@ -40,7 +40,7 @@ public class PaymentTest {
         assertEquals("d4e5f6a7-b8c9-0123-4567-89abcdef0123", payment.getId());
         assertEquals("VOUCHER", payment.getMethod());
         assertEquals("SUCCESS", payment.getStatus());
-        assertEquals("1234ESHOPABC5678", payment.getPaymentData().get("voucherCode"));
+        assertEquals("ESHOP1234ABC5678", payment.getPaymentData().get("voucherCode"));
         assertEquals(OrderStatus.SUCCESS.getValue(), payment.getOrder().getStatus());
     }
 
