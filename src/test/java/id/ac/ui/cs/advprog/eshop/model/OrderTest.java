@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class OrderTest {
 
     private List<Product> products;
@@ -43,10 +45,10 @@ public class OrderTest {
         assertEquals("Sampo Cap Bambang", order.getProducts().get(0).getProductName());
         assertEquals("Sabun Cap Usep", order.getProducts().get(1).getProductName());
 
-        assertEquals("13652556-012a-4c07-b546-54eb139d79b", order.getOrderId());
-        assertEquals(1708560000L, order.getOrderDate());
-        assertEquals("Safira Sudrajat", order.getCustomerName());
-        assertEquals("WAITING_PAYMENT", order.getOrderStatus());
+        assertEquals("13652556-012a-4c07-b546-54eb139d79b", order.getId());
+        assertEquals(1708560000L, order.getOrderTime());
+        assertEquals("Safira Sudrajat", order.getAuthor());
+        assertEquals("WAITING_PAYMENT", order.getStatus());
     }
 
     @Test
