@@ -1,7 +1,9 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import enums.PaymentMethod;
 import lombok.Getter;
 import lombok.Setter;
+import enums.PaymentStatus;
 
 import java.util.Map;
 
@@ -19,13 +21,13 @@ public class Payment {
         this.paymentData = paymentData;
         this.order = order;
 
-        if (method. equals("VOUCHER") || method.equals("BANK")) {
+        if (PaymentMethod.contains(method)) {
             this.method = method;
         } else {
             throw new IllegalArgumentException();
         }
 
-        if (status.equals("SUCCESS") || status.equals("REJECTED")) {
+        if (PaymentStatus.contains(status)) {
             this.status = status;
         } else {
             throw new IllegalArgumentException();

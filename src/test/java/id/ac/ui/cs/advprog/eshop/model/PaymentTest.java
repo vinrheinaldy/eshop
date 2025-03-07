@@ -3,6 +3,8 @@ package id.ac.ui.cs.advprog.eshop.model;
 import enums.OrderStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import enums.PaymentStatus;
+import enums.PaymentMethod;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,12 +36,12 @@ public class PaymentTest {
 
     @Test
     void testCreatePaymentValid() {
-        Payment payment = new Payment("d4e5f6a7-b8c9-0123-4567-89abcdef0123", "VOUCHER", "SUCCESS", paymentData, order);
+        Payment payment = new Payment("d4e5f6a7-b8c9-0123-4567-89abcdef0123", PaymentMethod.VOUCHER.getValue(), PaymentStatus.SUCCESS.getValue(), paymentData, order);
 
         assertNotNull(payment);
         assertEquals("d4e5f6a7-b8c9-0123-4567-89abcdef0123", payment.getId());
-        assertEquals("VOUCHER", payment.getMethod());
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentMethod.VOUCHER.getValue(), payment.getMethod());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         assertEquals("ESHOP1234ABC5678", payment.getPaymentData().get("voucherCode"));
         assertEquals(OrderStatus.SUCCESS.getValue(), payment.getOrder().getStatus());
     }
@@ -47,14 +49,14 @@ public class PaymentTest {
     @Test
     void testCreatPaymentNotValidStatus(){
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("d4e5f6a7-b8c9-0123-4567-89abcdef0123", "VOUCHER", "PENDING", paymentData, order);
+            Payment payment = new Payment("d4e5f6a7-b8c9-0123-4567-89abcdef0123", PaymentMethod.VOUCHER.getValue(), "PENDING", paymentData, order);
         });
     }
 
     @Test
     void testCreatPaymentNotValidMethod(){
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("d4e5f6a7-b8c9-0123-4567-89abcdef0123", "CREDIT", "SUCCESS", paymentData, order);
+            Payment payment = new Payment("d4e5f6a7-b8c9-0123-4567-89abcdef0123", "CREDIT", PaymentStatus.SUCCESS.getValue(), paymentData, order);
         });
     }
 }
