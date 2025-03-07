@@ -49,3 +49,18 @@ Beberapa kesalahan dari kode yang saya temui adalah Unecessary Constructor dan U
    Jika SOLID principles tidak diterapkan maka proyek ini berpotensi memiliki beberapa masalah. Contohnya adalah jika CarController masih menyatu dengan ProductController, jika kita mengubah sesuatu pada product kita harus memeriksa apakah ada dampak terhadap Car. Jika CarServiceImpl langsung menggunakan implementasi dari CarRepositoryImpl, maka saat testing kita harus pakai data asli,dan tidak bisa menggunakan mock repository. Jika CarServiceImpl masih menggunakan CarRepository, jika kita ingin mengubah penyimpanan data, kita harus mengubah semua yang menggunakan CarRepository.
    
 </details>
+
+<details>
+  <summary>
+    Module 4
+  </summary>
+
+## Reflection 1
+
+TDD membantu saya mendapatkan feedback lebih awal, membuat desain kode yang modular, dan menghasilkan dokumentasi hidup melalui unit tests. Dengan menulis tes sebelum implementasi, saya dapat mengidentifikasi masalah desain dan fungsionalitas sejak dini, yang sangat berguna untuk mengurangi kesalahan dan meningkatkan kualitas kode.
+
+## Reflection 2
+
+Tes yang saya buat cukup cepat, independen, dan repeatable, karena menggunakan mock untuk mengisolasi dependensi dan memastikan setiap tes dapat dijalankan secara terpisah. Hasil tes juga self-validating karena pass/fail-nya langsung memberikan feedback tanpa memerlukan interpretasi manual, sehingga memudahkan proses debugging.
+   
+</details>
