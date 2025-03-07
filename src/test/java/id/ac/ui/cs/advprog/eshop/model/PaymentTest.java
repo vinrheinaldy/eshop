@@ -34,7 +34,7 @@ public class PaymentTest {
 
     @Test
     void testCreatePaymentValid() {
-        Payment payment = new Payment("", "VOUCHER", "SUCCESS", paymentData, order);
+        Payment payment = new Payment("d4e5f6a7-b8c9-0123-4567-89abcdef0123", "VOUCHER", "SUCCESS", paymentData, order);
 
         assertNotNull(payment);
         assertEquals("d4e5f6a7-b8c9-0123-4567-89abcdef0123", payment.getId());
